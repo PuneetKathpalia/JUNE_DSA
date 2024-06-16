@@ -12,4 +12,4 @@ public:
         if(frequency.size()==unique.size()) return true;
         return false;
     }
-};
+}; 
