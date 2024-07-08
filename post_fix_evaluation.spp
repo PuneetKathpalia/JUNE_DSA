@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Link : https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
+
+class Solution {
+    int evaluate(int a, int b, string op) {
+        if(op == "+")
+            return a + b;
+        if(op == "-")
+            return a - b;
+        if(op == "*")
+            return a * b;
+        return a / b;
+    }
+    bool isOperator(string s) {
+        return s == "+" or s == "-" or s == "*" or s == "/";
+    }
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> operands;
+        for(string token : tokens) {
+            if(isOperator(token)) {
+                int b = operands.top();
+                operands.pop();
+                int a = operands.top();
+                operands.pop();
+
+                operands.push(evaluate(a, b, token));
+            }
+            else {
+                operands.push(stoi(token));
+            }
+        }
+
+        return operands.top();
+    }
+};
+
+int main() {
+	// your code goes here
+	return 0;
+}
